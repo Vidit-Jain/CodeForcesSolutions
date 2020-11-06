@@ -17,20 +17,39 @@ int main(){
     int n;
     cin>>n;
     int arr[n];
+    int negatives=0;
+    bool hasPositive=false;
     for(int i=0;i<n;i++){
         cin>>arr[i];
+        negatives+=(arr[i]<0);
+        if(arr[i]>0) hasPositive=true;
     }
-    int negativeindex=-1,positiveindex=-1,zeroindex=-1;
-    for(int i=0;i<n;i++){
-        if(arr[i]<0) negativeindex=i;
-        else if(arr[i]>0) positiveindex=i;
-        else zeroindex=i;
+    vector<int> nv,pv,zv;
+    if(hasPositive){
+        for(int i=0;i<n;i++){
+            if(arr[i]<0 && nv.size()==0) nv.push_back(arr[i]);
+            else if(arr[i]>0 && pv.size()==0) pv.push_back(arr[i]);
+            else zv.push_back(arr[i]);
+        }
     }
-    cout<<"1 "<<arr[negativeindex]<<"\n1 "<<arr[positiveindex]<<"\n";
-    cout<<n-2<<" 0 ";
-    for(int i=0;i<n;i++){
-        if(i==negativeindex || i==positiveindex || i==zeroindex) continue;
-        cout<<arr[i]<<" ";
+    else{
+        for(int i=0;i<n;i++){
+            if(arr[i]<0 && nv.size()==0) nv.push_back(arr[i]);
+            else if(arr[i]<0 && pv.size()<2) pv.push_back(arr[i]);
+            else zv.push_back(arr[i]);
+        }
+    }
+    cout<<nv.size()<<" ";
+    for(auto s:nv){
+        cout<<s<<" ";
+    }
+    cout<<"\n"<<pv.size()<<" ";
+    for(auto s:pv){
+        cout<<s<<" ";
+    }
+    cout<<"\n"<<zv.size()<<" ";
+    for(auto s:zv){
+        cout<<s<<" ";
     }
     cout<<"\n";
 }
