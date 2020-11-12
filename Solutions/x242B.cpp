@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define length(a) (int)a.size()
-#define all(a) a.begin(),a.end()
 #define tolowercase(s) transform(s.begin(),s.end(),s.begin(),::tolower);
 #define touppercase(s) transform(s.begin(),s.end(),s.begin(),::toupper);
 #define lsb(x) (x&(-x))
@@ -14,26 +12,32 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    int s,n;
-    cin>>s>>n;
+    #ifdef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
+    
+    int n;
+    cin>>n;
     vector<pair<int,int>> v;
+    vector<int> x,y;
     for(int i=0;i<n;i++){
         int a,b;
         cin>>a>>b;
-        
         v.push_back({a,b});
+        x.push_back(a);
+        y.push_back(b);
     }
-    sort(v.begin(),v.end());
-    bool flag=true;
-    for(auto x:v){
-        if(s>x.first){
-            s+=x.second;
-        }
-        else{ 
-            flag=false;
+    sort(x.begin(),x.end());
+    sort(y.begin(),y.end());
+    int lowest=x[0],highest=y[n-1];
+    bool flag=false;
+    for(int i=0;i<n;i++){
+        if(v[i].first<=lowest && v[i].second>=highest){
+            cout<<i+1<<"\n";
+            flag=true;
             break;
         }
     }
-    if(flag) cout<<"YES\n";
-    else cout<<"NO\n";
+    if(!flag) cout<<"-1\n";
 }

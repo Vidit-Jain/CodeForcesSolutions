@@ -14,26 +14,12 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    int s,n;
-    cin>>s>>n;
-    vector<pair<int,int>> v;
-    for(int i=0;i<n;i++){
-        int a,b;
-        cin>>a>>b;
-        
-        v.push_back({a,b});
+    int y,k,n;
+    cin>>y>>k>>n;
+    int a=(floor(y/(double)k)+1)*k;
+    if(a>n) cout<<"-1";
+    for(;a<=n;a+=k){
+        cout<<a-y<<" ";
     }
-    sort(v.begin(),v.end());
-    bool flag=true;
-    for(auto x:v){
-        if(s>x.first){
-            s+=x.second;
-        }
-        else{ 
-            flag=false;
-            break;
-        }
-    }
-    if(flag) cout<<"YES\n";
-    else cout<<"NO\n";
+    cout<<"\n";
 }
