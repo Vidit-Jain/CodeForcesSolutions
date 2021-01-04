@@ -18,7 +18,7 @@ typedef vector<vii> vvii;
 #define DBG(vari) cerr<<#vari<<" = "<<(vari)<<endl;
 #define file_read(x,y) freopen(x, "r", stdin); \
 						freopen(y, "w", stdout);
-
+ 
 int main(){
 	ios::sync_with_stdio(false);
 	cin.tie(0);
@@ -26,21 +26,25 @@ int main(){
 	int t;
 	cin>>t;
 	while(t--){
-		ll n,k;
-		cin >> n >> k;
-		ll h[n];
-		for(int i=0;i<n;i++) cin>>h[i];
-		int currlowest=h[0],currhighest=h[0];
-		bool flag=true;
-		for(int i=1;i<n;i++){
-			if(currlowest>=h[i]+k-1+k || currhighest+k<=h[i]) flag=false;
-			ll t1=min(currhighest+k-1,h[i]);
-			ll t2=max(h[i]+k-1,currlowest-k+1);
-			currlowest=t1;
-			currhighest=t2;
+		int n;
+		cin>>n;
+		int a[n];
+		for(int i=0;i<n;i++) cin>>a[i];
+		int m;
+		cin>>m;
+		int b[m];
+		for(int i=0;i<m;i++) cin>>b[i];
+		int amax=0,curr=0;
+		for(int i=0;i<n;i++){
+			curr+=a[i];
+			amax=max(amax,curr);			
 		}
-		if(flag && currlowest==h[n-1]) cout<<"YES\n";
-		else cout<<"NO\n";
+		curr=0;
+		int bmax=0;
+		for(int i=0;i<m;i++){
+			curr+=b[i];
+			bmax=max(bmax,curr);			
+		}
+		cout << amax+bmax <<"\n";
 	}
-
 }
